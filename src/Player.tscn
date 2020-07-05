@@ -63,6 +63,5 @@ playing = true
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 1 )
 [connection signal="timeout" from="Red/ShootTimer" to="." method="_on_ShootTimer_timeout"]

@@ -36,10 +36,10 @@ func _physics_process(delta):
 		$Sprite.set_global_position(anchor)
 	elif Input.is_mouse_button_pressed(BUTTON_LEFT) and anchor:
 		
-		var mouse = get_global_mouse_position()
+		var mouse = anchor - get_global_mouse_position()
 		var m_centered = mouse.x - Globals.WIDTH/2
-		m_centered = clamp(m_centered, -Globals.WIDTH/2, Globals.WIDTH/2)
-		x += m_centered * (PI/Globals.WIDTH)
+		#m_centered = clamp(m_centered, -Globals.WIDTH/2, Globals.WIDTH/2)
+		x = m_centered * (PI/Globals.WIDTH)
 		print(mouse, "\t\t", m_centered, "\t\t", x, "\t\t", Vector2(cos(x), sin(x)))
 		
 		var red_pos = Vector2(red_default_pos.x - (cos(x) * radius.x), red_default_pos.y - (sin(x) * radius.y))
