@@ -5,8 +5,13 @@ var BulletScene := preload("res://src/PlayerBullet.tscn")
 onready var GameWorldNode := find_parent("GameWorld")
 var move_speed := 300
 
-var radius := Vector2(50.0, 50.0)
+var x := 0.0 # in radians
+var radius := Vector2(100.0, 100.0)
 var anchor = null # Vector2
+# What the fuck is this?
+var red_default_pos := Vector2(self.get_position().x, self.get_position().y)
+var blue_default_pos := Vector2(self.get_position().x, self.get_position().y)
+
 var damage := 2
 
 
@@ -30,18 +35,35 @@ func _physics_process(delta):
 		anchor = get_global_mouse_position()
 		$Sprite.set_global_position(anchor)
 	elif Input.is_mouse_button_pressed(BUTTON_LEFT) and anchor:
+		
+		var mouse = get_global_mouse_position()
+		var m_centered = mouse.x - Globals.WIDTH/2
+		m_centered = clamp(m_centered, -Globals.WIDTH/2, Globals.WIDTH/2)
+		x += m_centered * (PI/Globals.WIDTH)
+		print(mouse, "\t\t", m_centered, "\t\t", x, "\t\t", Vector2(cos(x), sin(x)))
+		
+		var red_pos = Vector2(red_default_pos.x - (cos(x) * radius.x), red_default_pos.y - (sin(x) * radius.y))
+		$Red.set_position(red_pos)
+		var blue_pos = Vector2(blue_default_pos.x + (cos(x) * radius.x), blue_default_pos.y + (sin(x) * radius.y))
+		$Blue.set_position(blue_pos)
+		#$Red.set_position(Vector2(m_centered, $Red.get_position().y))
+		
+		
+		#var default_pos := get_position() -  # in radians
+		
 		# The anchor is set; move Red and Blue around the anchor w/ the mouse
+		#var anchor_diff = get_global_mouse_position() - anchor
+		#print(min(abs(anchor_diff.x), abs(anchor_diff.y)))
 		
-		var mouse = get_global_mouse_position() - anchor
-		print(mouse)
-		var r = sqrt(pow(mouse.x, 2.0) + pow(mouse.y, 2.0))
+		#var dist_anchor_to_diff = sqrt(pow(anchor_diff.x, 2.0) + pow(anchor_diff.y, 2.0))
+		#print(dist_anchor_to_mouse)
 		
-		var a_y = sin(PI/4) * r # assuming we have equilateral triangles...
-		var a_x = cos(PI/4) * r
-		print(Vector2(a_x, a_y))
+		#var a_y = sin(PI/4) * r # assuming we have equilateral triangles...
+		#var a_x = cos(PI/4) * r
+		#print(Vector2(a_x, a_y))
 		
-		$Red.set_position(Vector2(min(-r, -16.0), 0))
-		$Blue.set_position(Vector2(max(r, 16.0), 0))
+		#$Red.set_position(Vector2(min(-r, -16.0), 0))
+		#$Blue.set_position(Vector2(max(r, 16.0), 0))
 	
 	
 	if Input.is_action_pressed("shoot"):
