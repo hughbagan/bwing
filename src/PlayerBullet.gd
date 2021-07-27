@@ -12,3 +12,5 @@ func _physics_process(delta):
 		if collision.collider.is_in_group("Enemy"):
 			collision.collider.take_damage(damage)
 			self.queue_free()
+	if get_position().y < -64:
+		self.queue_free()

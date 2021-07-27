@@ -2,6 +2,7 @@ class_name Player extends KinematicBody2D
 
 var BulletScene := preload("res://src/PlayerBullet.tscn")
 onready var GameWorldNode := find_parent("GameWorld")
+onready var size :float = $CollisionShape2D.shape.radius*2
 var move_speed := 300
 var damage := 2
 
@@ -23,9 +24,7 @@ func _physics_process(delta):
 		var mouse = get_global_mouse_position()
 		if mouse.y < Globals.HEIGHT and mouse.y > 0 \
 		and mouse.x < Globals.WIDTH and mouse.x > 0:
-			self.set_position(mouse)
-	# Shooting
-	if Input.is_action_pressed("shoot"):
+			self.set_position(Vector2(mouse.x, mouse.y-(size)))
 		if $ShootTimer.is_stopped():
 			instance_bullet()
 			$ShootTimer.start()
@@ -34,6 +33,20 @@ func _physics_process(delta):
 		$ShootTimer.stop()
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 0
+	# Shooting
+#	if Input.is_action_pressed("shoot"):
+#		if $ShootTimer.is_stopped():
+#			instance_bullet()
+#			$ShootTimer.start()
+#			$AnimatedSprite.play()
+#	else:
+#		$ShootTimer.stop()
+#		$AnimatedSprite.stop()
+#		$AnimatedSprite.frame = 0
+
+
+func _on_ShootTimer_timeout():
+	instance_bullet()
 
 
 func instance_bullet():
@@ -43,5 +56,3 @@ func instance_bullet():
 	GameWorldNode.add_child(new_bullet)
 
 
-func _on_ShootTimer_timeout():
-	instance_bullet()
