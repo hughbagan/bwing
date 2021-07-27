@@ -1,6 +1,5 @@
 class_name Enemy extends KinematicBody2D
 
-
 var hp := 5
 
 

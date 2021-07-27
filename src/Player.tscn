@@ -1,15 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/sprites/sm_target.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/red_ship/red_ship5.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/red_ship/red_ship3.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/red_ship/red_ship4.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/red_ship/red_ship1.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/red_ship/red_ship2.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/blue_ship/blue_ship1.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/blue_ship/blue_ship3.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/blue_ship/blue_ship2.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,45 +19,17 @@ animations = [ {
 radius = 16.0
 height = 2.0
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="CircleShape2D" id=4]
-radius = 16.0
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="Red" type="KinematicBody2D" parent="."]
-position = Vector2( -24, 0 )
-
-[node name="ShootTimer" type="Timer" parent="Red"]
+[node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.2
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Red"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Red"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="Blue" type="KinematicBody2D" parent="."]
-position = Vector2( 24, 0 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Blue"]
-scale = Vector2( 3, 3 )
-frames = SubResource( 3 )
-frame = 1
-playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Blue"]
-shape = SubResource( 4 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-[connection signal="timeout" from="Red/ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
