@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://src/Enemy.gd"
+"path": "res://src/enemies/Enemy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -23,11 +23,23 @@ _global_script_classes=[ {
 "class": "PlayerBullet",
 "language": "GDScript",
 "path": "res://src/PlayerBullet.gd"
+}, {
+"base": "Node2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://src/Spawner.gd"
+}, {
+"base": "Enemy",
+"class": "TurnEnemy",
+"language": "GDScript",
+"path": "res://src/enemies/TurnEnemy.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "Player": "",
-"PlayerBullet": ""
+"PlayerBullet": "",
+"Spawner": "",
+"TurnEnemy": ""
 }
 
 [application]

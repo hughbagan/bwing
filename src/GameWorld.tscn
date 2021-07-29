@@ -1,18 +1,33 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Spawner.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/8x8 Wide Mono Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
 
 [node name="GameWorld" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 354.293, 879.956 )
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 108, 368 )
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 3 )
 
-[node name="Enemy2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 586, 138 )
+[node name="Label" type="Label" parent="Spawner"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 336.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 1 )
+text = "Testing."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Enemy3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 240, 142 )
+[node name="SpawnTimer" type="Timer" parent="Spawner"]
+wait_time = 0.5
+
+[connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_SpawnTimer_timeout"]

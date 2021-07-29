@@ -1,7 +1,7 @@
 class_name PlayerBullet extends KinematicBody2D
 
 
-const MOVE_SPEED := 500
+const MOVE_SPEED := 2000
 var move_vec := Vector2(0, -1)
 var damage # initialized when instanced
 

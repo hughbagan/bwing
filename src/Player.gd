@@ -22,7 +22,7 @@ func _physics_process(delta):
 	# Mouse controls
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		var mouse = get_global_mouse_position()
-		if mouse.y < Globals.HEIGHT and mouse.y > 0 \
+		if mouse.y < Globals.HEIGHT+size and mouse.y > 0 \
 		and mouse.x < Globals.WIDTH and mouse.x > 0:
 			self.set_position(Vector2(mouse.x, mouse.y-(size)))
 		if $ShootTimer.is_stopped():
