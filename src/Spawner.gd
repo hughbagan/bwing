@@ -13,6 +13,7 @@ var point :Position2D
 var path :Array
 
 func _ready():
+	randomize()
 	# Create the spawn points
 	var num_points_x = floor(Globals.WIDTH / step_size)
 	for i in range(0, num_points_x):

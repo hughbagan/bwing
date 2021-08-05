@@ -33,16 +33,6 @@ func _physics_process(delta):
 		$ShootTimer.stop()
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 0
-	# Shooting
-#	if Input.is_action_pressed("shoot"):
-#		if $ShootTimer.is_stopped():
-#			instance_bullet()
-#			$ShootTimer.start()
-#			$AnimatedSprite.play()
-#	else:
-#		$ShootTimer.stop()
-#		$AnimatedSprite.stop()
-#		$AnimatedSprite.frame = 0
 
 
 func _on_ShootTimer_timeout():

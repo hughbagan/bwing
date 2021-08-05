@@ -8,14 +8,10 @@ var target :Vector2
 var reached_turn := false
 
 
-#func _ready():
-#	pass
-
-
 func _physics_process(delta):
 	# Go to the specified point
 	var diff := self.target - self.position
-	if abs(diff.x) < 1 and abs(diff.y) < 1:
+	if abs(diff.x) < 2 and abs(diff.y) < 2:
 		if not self.reached_turn:
 			self.target = self.destination
 			self.reached_turn = true
@@ -23,25 +19,7 @@ func _physics_process(delta):
 		else:
 			self.queue_free() # Reached the destination
 	var dir := diff.normalized()
-#	var move_x := move_toward(position.x, target.x, dir.x*speed*delta)
-#	var move_y := move_toward(position.y, target.y, dir.y*speed*delta)
-#	var move_amount := Vector2(move_x, move_y)
-#	print(position, dir)
 	move_and_collide(dir*speed*delta) # or move_and_slide(move_amount / delta)
-
-
-#func move_toward(orig:float, target:float, amount:float) -> float:
-#	# Returns a coordinate either x or y
-#	print(amount)
-#	var result:float
-#	if abs(orig - target) <= amount:
-#		# We're nearly right on top of the target
-#		result = target
-#	elif orig < target:
-#		result = min(orig + amount, target)
-#	elif orig > target:
-#		result = max(orig - amount, target)
-#	return result
 
 
 func set_path(_turn_point:Vector2, _destination:Vector2) -> void:
@@ -61,4 +39,5 @@ func generate_path_opposite() -> Array:
 		self.position.x, # Leave on the same side of the screen we spawn on
 		Globals.HEIGHT+self.position.y
 	)
+	print(turn_point, destination)
 	return [turn_point, destination]
