@@ -24,7 +24,7 @@ func _physics_process(delta):
 		var mouse = get_global_mouse_position()
 		if mouse.y < Globals.HEIGHT+size and mouse.y > 0 \
 		and mouse.x < Globals.WIDTH and mouse.x > 0:
-			self.set_position(Vector2(mouse.x, mouse.y-(size)))
+			self.set_position(Vector2(mouse.x, mouse.y-(size/2)))
 		if $ShootTimer.is_stopped():
 			instance_bullet()
 			$ShootTimer.start()
